@@ -16,6 +16,8 @@ int main() {
     }
     wait(&status);
     
+    
+    
     // Solo ejecutar el segundo proceso si el primero terminó con éxito (código 0)
     if (status != 0) {
         return 0;        
@@ -26,7 +28,9 @@ int main() {
         perror("execl failed");
         exit(1);
     }
-        wait(NULL);
+    wait(NULL);
+    
+    
     
     return 0;
 }

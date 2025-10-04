@@ -114,6 +114,8 @@ int main() {
 
 ```
 
+
+
 Ejemplo de salida de ambos programas
 
 ```bash
