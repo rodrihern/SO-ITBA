@@ -151,3 +151,7 @@ Si no hay ningún proceso en estado `READY` para ejecutar (por ejemplo, al inici
 - **Proceso Idle**: El scheduler elige un **proceso especial de baja prioridad** (proceso `idle`).
 - **Función**: La única tarea de este proceso es ejecutar la instrucción **`hlt`** (halt), que detiene la CPU hasta que llegue la próxima interrupción (como la del teclado o el timer). Esto evita que la CPU consuma energía innecesariamente corriendo en un bucle vacío.
 	
+
+
+
+## Preguntas
