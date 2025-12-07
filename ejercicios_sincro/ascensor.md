@@ -14,68 +14,51 @@ La operación de bajar debe actualizar el estado del ascensor y, si es el caso, 
 
 TAREA. Debe usted implementar mediante semáforos las acciones de sincronización de estas operaciones de subir y bajar. Introduzca las variables auxiliares que considere necesarias. No hay que implementar el sistema completo, ni los hilos: sólo el código de sincronización de estas dos operaciones.
 
-## Posibles soluciones
+## Posibles solucion
 
+En esta solucion, para evitar inanicion de gordos, hacemos que hasta que no se pueda subir uno, los demas tampoco se puedan subir con el lock de esperando_para_subir
 
-Solucion de korman. Puede haber inanicion onda si hay un gordo de 400 kilos y muchas personas de 60 kilos que se van subiendo y bajando pero nunca dejando al ascensor vacio, o incluso dejandolo vacio pero con condiciones de carrera, el gordo no sube nunca
 
 ```c
 #define MAX_PESO 450
 #define MAX_PERSONAS 6
 
-sem_t mutex = 1;
-sem_t espacio = 0;
-int peso_total = 0;
-int personas = 0;
+sem_t esperando_para_subir = 1;
+sem_t espacios_libres = MAX_PERSONAS
+sem_t mutex_peso = 1;
+int peso_ascensor = 0;
 
-void sube_persona(int peso) {
-    sem_wait(&mutex);
-    while (personas >= MAX_PERSONAS || peso_total + peso > MAX_PESO) {
-        sem_post(&mutex);
-        sem_wait(&espacio);
-        sem_wait(&mutex);
+sube_persona(int peso) {
+    wait(esperando_para_subir); // solo puede haber uno
+    wait(espacios_libres); // tome mi lugar
+    int espacios_esperados = 0;
+    wait(mutex_peso); // me quiero fijar el peso
+    while (peso_ascensor + peso > MAX_PESO) {
+        post(mutex_peso);
+        wait(espacios_libres);
+        espacios_esperados++;
+        wait(mutex_peso);
     }
-    peso_total += peso;
-    personas += 1;
-    sem_post(&mutex);
-}
+    post(mutex_peso);
 
-void baja_persona(int peso) {
-    sem_wait(&mutex);
-    peso_total -= peso;
-    personas -= 1;
-    sem_post(&mutex);
-    sem_post(&espacio);
-}
-```
-
-Solucion de branda en la que si hay un gordo que quiere subir y no puede, nadie mas puede subir hasta que el gordo no sube
-
-```c
-int sem_mutex_access=1;
-int sem_someone_waiting=1;
-int sem_maximo_personas=6;
-int peso_actual=0;
-#define PESO_MAXIMO 450
-
-sube_persona(peso) {
-    down(sem_someone_waiting); // si hay una persona intentando entrar se bloquea
-    down(sem_maximo_personas);
-    while(peso_actual + peso > PESO_MAXIMO){ // itera siempre que no pueda entrar
-        down(sem_mutex_access);
+    // hago los post de los lugares libres
+    while (espascios_esperados-- > 0) {
+        post(espacios_libres);
     }
-    entro(); // no importa que hace
-    peso_actual+=peso;
-    up(sem_someone_waiting); // libero a la persona que estaba esperando
-    up(sem_mutex_access); // permite que se meta otro que recalcule el peso
+
+    subo(); // no importa que hace
+    post(esperando_para_subir);
 }
 
-baja_persona(peso) {
-    peso_actual-=peso;
+baja_persona(int peso) {
+    wait(mutex_peso);
+    peso_ascensor -= peso;
+    post(mutex_peso);
     salgo(); // no importa que hace
-    up(sem_maximo_personas); 
-    up(sem_mutex_access); // permito que se meta otro o que recalcule el peso
+    post(espacios_libres);
 }
+
+
 
 ```
 

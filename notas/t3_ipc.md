@@ -264,6 +264,8 @@ sem_t tenedores[N];  // Un semáforo por cada tenedor
 void filosofo(int id) {
 
     while(TRUE) {
+        think();
+
         if(id % 2 == 0) {
             //Toma el derecho primero
             down(&tenedores[(id + 1) % N]);
@@ -271,12 +273,15 @@ void filosofo(int id) {
 
             //Toma el izquierdo
             down(&tenedores[id]);
+            take_fork();
         } else {
             //Toma el izquierdo primero
             down(&tenedores[id]);
+            take_fork();
 
             //Toma el derecho
             down(&tenedores[(id + 1) % N]);
+            take_fork();
         }
 
         //Si tiene ambos come
@@ -298,34 +303,69 @@ hecho por la catedra con inanicion:
 
 ```c
 
-sem_t toilet_mutex = 1;
+// Baño unisex sin inanición (hombres y mujeres no se mezclan)
+// Idea: lightswitch (contador) + turnstile (cola justa compartida)
 
-sem_t men_count_mutex = 1;
-int men_count = 0;
+sem_t toilet_mutex = 1;     // “baño vacío” (exclusión entre géneros)
+sem_t turnstile    = 1;     // torniquete (equidad)
+
+sem_t men_count_mutex   = 1;
+int   men_count         = 0;
 
 sem_t women_count_mutex = 1;
-int women_count = 0;
+int   women_count       = 0;
 
 
-// el codigo de la mujer es analogo
+// ---- HOMBRE ----
+void man() {
+    while (1) {
 
-man() {
-    while(1) {
+        // TORNIQUETE: nadie “se cuela” cuando el otro género ya está esperando
+        wait(turnstile);
+
         wait(men_count_mutex);
-        if (men_count++ == 0)
+        if (men_count++ == 0)          // primer hombre bloquea el baño
             wait(toilet_mutex);
         post(men_count_mutex);
-        
+
+        post(turnstile);               // ya “enganchado” al grupo, libero la cola
+
         use_toilet();
-        
+
         wait(men_count_mutex);
-        if (men_count_mutex-- == 1) 
+        if (--men_count == 0)          // último hombre libera el baño
             post(toilet_mutex);
         post(men_count_mutex);
-        
+
         work();
     }
-} 
+}
+
+
+// ---- MUJER (análogo) ----
+void woman() {
+    while (1) {
+
+        wait(turnstile);
+
+        wait(women_count_mutex);
+        if (women_count++ == 0)
+            wait(toilet_mutex);
+        post(women_count_mutex);
+
+        post(turnstile);
+
+        use_toilet();
+
+        wait(women_count_mutex);
+        if (--women_count == 0)
+            post(toilet_mutex);
+        post(women_count_mutex);
+
+        work();
+    }
+}
+
 
 
 ```
