@@ -159,3 +159,65 @@ Desalojar la pagina que no ha sido usada el mayor tiempo (requiere de tener una 
 
 Un contador para cada pagina cada vez que se referencia, se va la que tiene el contador mas chico
 
+### LRU en software
+
+hay un contador que lo que se hace es que en cada tick, se shiftea a la derecha y se pone como bit mas significativo el de R
+
+por ejemplo, este podria ser el registro a lo largo del tiempo
+
+0000 R=1
+
+1000 R=1
+
+1100 R=0
+
+0110 R=1
+
+1011 R=0
+
+0101 ...
+
+el candidato a irse es la pagina con menor valor
+
+## Conceptos
+
+**Demand paging**: cuantas paginas tiene en memoria un proceso justo antes de comenzar a ejecutar
+
+**Locality of reference**: Los procesos hacen muchas referencias a pocas paginas
+
+**Working set**: El conjunto de paginas que estan siendo usadas actualmente
+
+**Trashing**: cuando no entra todo el working set en memoria
+
+**Working set model - Prepaging**: subir paginas antes de que se comience a ejecutar
+
+### Working set (WS)
+
+se puede definir el working set como las paginas que se usaron en las ultimas k referencias a memoria o en el ultimo intervalo de tiempo t
+
+Se van las paginas en el siguiente orden:
+
+1. R=0 y age > t (fuera del working set)
+2. R=0 dentro del working set -> se va la mas vieja
+3. R=1 random, preferiblemente M=0
+
+### Working Set Clock (WSC)
+
++ si R=1, resetea R y actualiza el tiempo
++ si R=0 y fuera del ws y M=0 se desaloja sin actualizar en disco
++ si R=0, fuera del ws y M=1 se planifica con un limite el guardado en disco y se avanza
+
+En caso de que no se encuentra ninguna:
+    + se planifico alguna escritura y se continua girando hasta que aparezca M = 0
+    + No se planificaron escrituras y se desaloja alguna del working set (la mas vieja preferiblemente M=0)
+
+## Ejercicios
+
+
+
+
+
+
+
+
+
