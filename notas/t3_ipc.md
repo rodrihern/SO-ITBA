@@ -352,7 +352,7 @@ void woman() {
         if (women_count++ == 0)
             wait(toilet_mutex);
         post(women_count_mutex);
-
+        
         post(turnstile);
 
         use_toilet();

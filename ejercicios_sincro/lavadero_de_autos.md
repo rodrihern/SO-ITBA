@@ -13,6 +13,8 @@ Se esta implementando una estación de lavado automotor con 5 robots de lavado. 
 
 Realice el código de sincronización del proceso del robot.
 
+
+
 ## Mi solucion
 
 ```c
