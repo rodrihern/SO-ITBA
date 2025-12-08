@@ -21,21 +21,23 @@ int count_ratones = 0;
 void raton(){
     while(1){
         wait(sem_gato_ready); // si hay un gato esperando, el raton espera
-        post(sem_gato_ready); // liberarlo lo antes posible
+
+        wait(sem_cant_ratones); // permite que entren hasta 3 ratones
 
         wait(sem_count_ratones);
         if(count_ratones++ == 0) wait(sem_mutex); // entra el primer raton y que no entre ningun gato
         post(sem_count_ratones);
 
-        wait(sem_cant_ratones); // permite que entren hasta 3 ratones
+        post(sem_gato_ready);
+        
 
         entrar_cocina();
-
-        post(sem_cant_ratones); // libera el lugar para que entre otro raton
 
         wait(sem_count_ratones);
         if(--count_ratones == 0) post(sem_mutex);
         post(sem_count_ratones);
+        
+        post(sem_cant_ratones); // libera el lugar para que entre otro raton
     }
 }
 

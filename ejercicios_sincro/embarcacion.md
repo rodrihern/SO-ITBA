@@ -36,25 +36,22 @@ Para una devolución más clara se recomienda agregar números de línea a la so
 ## Mi solucion
 
 ```c
-#define MAX_ALUMNOS 20
+#define MAX_STUDENTS 20
 
 
 sem_t can_board = 0;
 sem_t boarded = 0;
-sem_t line = MAX_ALUMNOS;
+sem_t line = MAX_STUDENTS;
 
-sem_t alumnos_waiting_mutex = 0;
-int alumnos_waiting = 0;
+sem_t waiting_in_line_mutex = 0;
+int waiting_in_line = 0;
 
-
-
-
-alumno() {
+student() {
     wait(line);
 
-    wait(alumnos_waiting_mutex);
-    alumnos_waiting++;
-    post(alumnos_waiting_mutex);
+    wait(waiting_in_line_mutex);
+    waiting_in_line++;
+    post(waiting_in_line_mutex);
 
     wait(can_board);
     embarcar();
@@ -62,15 +59,15 @@ alumno() {
     
 }
 
-barco() {
+boat() {
 
-    wait(alumnos_waiting_mutex); // funciona tambien como torniquete
-    for (int i = 0; alumnos_waiting-- > 0; i++) {
+    wait(waiting_in_line_mutex); // funciona tambien como torniquete
+    for (int i = 0; waiting_in_line-- > 0; i++) {
         post(can_board);
         wait(boarded);
         post(line`);
     }
-    post(alumnos_waiting_mutex);
+    post(waiting_in_line_mutex);
 
     partir();
 }

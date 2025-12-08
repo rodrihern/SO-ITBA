@@ -5,3 +5,7 @@ los semaforos que protejen variables que se llamen como la variable y mutex
 light switch -> el primero que entra obtiene el acceso, el ultimo en salir lo otorga
 
 torniquete es corte que agarro yo la posta y no la tiene nadie mas, como en el del baño, el gato ready, o el gordo del ascensor
+
+el post del torniquete se hace una vez ingresado a la cocina
+
+para lugares libres hacer un semaforo inicializado en la cantidad de lugares
