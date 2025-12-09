@@ -199,7 +199,7 @@ Memoria disponible para procesos -> 3 GB y 512 MB
 
 Procesos identicos de 256 MB -> tengo espacio para n = 14 procesos
 
-si un proceso esta bloqueado una proporcion de tiempo p, se desperdicia $\frac{1}{p^n}$ del tiempo
+si un proceso esta bloqueado una proporcion de tiempo p, se desperdicia $p^n$ del tiempo
 
 luego
 

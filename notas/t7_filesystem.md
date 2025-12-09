@@ -37,6 +37,13 @@ index node, cada archivo tiene un i-node que tiene atributos y la lista de bloqu
 
 solo se cargan en memoria los i-nodos de los files que se estan usando en ese momento
 
+tiene:
+* owner
+* timestamps
+* size
+* block count
+* direcciones, directas, simple indirecta, doble indirectas, triple indirectas ...
+
 ## Ejercicios
 
 ### Pregunta 1
@@ -64,18 +71,21 @@ Y como son del mismo tamaño (y este no cambia) y el acceso es aleatorio, asigna
 
 **Considere un disco que tiene 10 bloques de datos desde el bloque 14 hasta el bloque 23. Sean f1 y f2 2 archivos almacenados en el disco. La estructura de directorio especifica que el primer bloque de cada archivo es 22 y 16 respectivamente. Dada la siguiente tabla FAT ¿Cuáles son los bloques correspondientes a f1 y cuáles a f2?**
 
-14	18
-15	17
-16	23
-17	21
-18	20
-19	15
-20	-1
-21	-1
-22	19
-23	14
+bloque | siguiente
+-- | --
+14 | 18
+15 | 17
+16 | 23
+17 | 21
+18 | 20
+19 | 15
+20 | -1
+21 | -1
+22 | 19
+23 | 14
 
 f1: 22 19 15 17 21
+
 f2: 16 23 14 18 20
 
 ### Pregunta 4

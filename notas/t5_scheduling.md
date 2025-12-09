@@ -22,7 +22,9 @@ bursts largos $\rightarrow$ cpu bound
 
 bursts cortos $\rightarrow$ I/O bound
 
-*preemptive*: el tipo interrumpe a los procesos, el non-preemptive adivina que hace
+*preemptive*: el tipo interrumpe a los procesos
+
+*non-preemptive*: adiviná que hace
 
 *quantum*: tiempo que se le da de cpu a un proceso antes de interrumpirlo
 
@@ -57,7 +59,7 @@ puede pasar que primero llegue uno con un burst muy largo y despues muchos con b
 
 ### Shortest Job First
 
-primero el mas corto maximizando el throughput y minimizando el turnaround time, la desventaja de este es el tema del responsiveness
+primero el mas corto maximizando el throughput, la desventaja de este es el tema del responsiveness
 
 ### Shortest Remaining Time Next
 

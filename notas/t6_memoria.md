@@ -53,7 +53,7 @@ Puede saltar por permisos o si no esta presente
 
 cuando se quiere referenciar una pagina que no esta present, seguramente se la bajo a disco, o hay que mapearla
 
-Si es por violacion de permisos se violan permisos se mata al proceso porque seguramente estaba queriendo hacer una chanchada
+Si es por violacion de permisos se violan permisos a veces se mata al proceso porque seguramente estaba queriendo hacer una chanchada. Tambien puede ser que quizo hacer write en una zona read only que desencadena en un copy on write
 
 ## TLB: Translation lookaside buffer
 
@@ -93,13 +93,13 @@ Se hace muy grande una tabla si el EDV es muy grande, si a eso le sumamos que ca
 
 La idea de la tabla multinivel es evitar tener toda la tabla en memoria, solo lo necesario.
 
-el ejemplo que vimos en arqui es del procesador 80386 con el esquema de $2^{10} \times 2^{10} \times 2^{12} $ page directory -> page table
+el ejemplo que vimos en arqui es del procesador 80386 con el esquema de $2^{10} \times 2^{10} \times 2^{12}$ page directory -> page table
 
 luego las entradas de las tablas pasaron a ser de 64 bits y pasaron a un esquema 
-$ 2^9 \times 2^9 \times 2^2 \times 2^{12} $
+$2^9 \times 2^9 \times 2^2 \times 2^{12}$
 
 y asi fue evolucionando hasta ahora que hay hasta nivel 5 (PML5) que puede direccionar hasta 57 bits
-$  2^9 \times 2^9 \times  2^9 \times 2^9 \times 2^9 \times 2^{12} $
+$2^9 \times 2^9 \times  2^9 \times 2^9 \times 2^9 \times 2^{12}$
 
 ## Tablas de paginas invertidas
 
