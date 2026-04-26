@@ -1,3 +1,8 @@
+---
+materia: so
+tipo: apuntes
+---
+
 # 📌 Inter Process Communication (IPC) – Resumen
 
 ## Conceptos iniciales
@@ -12,15 +17,15 @@
 ---
 
 ## Modelos de IPC
-### 1. Memoria compartida
+### Memoria compartida
 - Procesos acuerdan compartir una región de memoria física.  
 - Una vez creada, **no requiere syscalls** para leer/escribir.  
 - Organización de datos y sincronización queda a cargo de los procesos.  
-- Problema: coherencia de caché en sistemas multicore.  
-- **Ejemplos en UNIX**: `shm_open(3)`, `ftruncate(2)`, `mmap(2)`.  
+- Problema: coherencia de caché en sistemas multicore. Ver [[U4_arquitecturas#Multinúcleo (Multicore)|Arqui - Multicore]] y [[t4_threads|Threads]].
+- **Ejemplos en UNIX**: `shm_open(3)`, `ftruncate(2)`, `mmap(2)`. Ver también [[t6_memoria#Espacio de direcciones|SO - Memoria Virtual]].
 - ⚠️ Importante: los punteros no son válidos entre procesos, deben usarse **offsets**.
 
-### 2. Pasaje de mensajes
+### Pasaje de mensajes
 - Más simple en sistemas distribuidos.  
 - Útil para volúmenes pequeños de información.  
 - Requiere intervención del kernel.  
@@ -55,8 +60,8 @@
 
 ### Sockets
 - Comunicación **bidireccional full-duplex**.  
-- Pueden funcionar localmente (Unix Domain) o en red (TCP/UDP).  
-- Identificación: IP + puerto.  
+- Pueden funcionar localmente (Unix Domain) o en red (TCP/UDP). Ver [[0_Network#TCP|TCP]] y [[0_Network#UDP|UDP]] para los protocolos de transporte subyacentes, y [[1_Introduccion#Características de Protocolos|características]] de orientado a conexión vs no orientado.
+- Identificación: IP + puerto. Ver [[0_Network#IP ADDRESSES|direcciones IP]] y [[1_Introduccion#Capa de Transporte: Puertos Comunes|puertos comunes]].  
 - Modelo típico: cliente–servidor.  
 - En UNIX: `socket(2)`, `bind(2)`, `listen(2)`, `accept(2)`, `send(2)`, `recv(2)`.  
 - Comparación con FIFOs:
@@ -77,7 +82,7 @@
 ---
 
 ## Condiciones de carrera
-- Ocurren cuando el resultado depende del **orden de ejecución** entre procesos/hilos.  
+- Ocurren cuando el resultado depende del **orden de ejecución** entre procesos/hilos. Ver también en [[t4_threads#Conceptos básicos|Threads]] donde se muestra un ejemplo con código.
 - Ejemplo: home banking debitando dos veces un saldo.  
 - Solución: **exclusión mutua**.  
 

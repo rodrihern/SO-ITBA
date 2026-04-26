@@ -1,3 +1,8 @@
+---
+materia: so
+tipo: apuntes
+---
+
 # Memoria
 
 ## Memoria virtual
@@ -28,13 +33,13 @@ Partes fragmentadas del EDF pueden mapearse en el EDV de manera contigua, entonc
 
 swapping
 
-## Paginacion
+### Paginacion
 
 seria la unidad minima de memoria, serian tipo como bloques. 
 
 en el EDV se llaman paginas virtuales (VP) y en EDF marcos de pagina (PF)
 
-El mapeo es el mismo que en arqui, lo de las tablas de paginas que te redirigen
+El mapeo es el mismo que en arqui, lo de las tablas de paginas que te redirigen (ver [[U3_gestionDeMemoria#Paginación|Arqui - Paginación]] y [[U3_gestionDeMemoria#GDT y LDT|GDT/LDT]])
 
 ### Entrada de la tabla
 
@@ -59,11 +64,13 @@ Si es por violacion de permisos se violan permisos a veces se mata al proceso po
 
 Las tablas de paginas estan en memoria, lo cual hace que cada vez que tenga que traducir una direccion tengo que ir a la memoria (not good)
 
-Gracias a dios existe la TLB que es como una cache tipo para cachear las traducciones y evitar ir a la memoria para traducir la direccion cada vez
+Gracias a dios existe la TLB que es como una cache tipo para cachear las traducciones y evitar ir a la memoria para traducir la direccion cada vez. Ver la analogía con la [[U3_gestionDeMemoria#Memoria Caché|memoria caché de datos]] y cómo el hardware organiza los niveles de caché en [[U4_arquitecturas#Multinúcleo (Multicore)|procesadores multicore]].
 
 como las tablas de pagina son unicas por cada proceso, la TLB se invalida con cada context switch
 
 ## Administrar memoria libre
+
+Ver también los criterios de asignación de bloques de memoria en [[U3_gestionDeMemoria#Segmentación|Arqui - Segmentación]] para el contexto histórico.
 
 ### Bitmap 
 
@@ -212,11 +219,6 @@ En caso de que no se encuentra ninguna:
     + No se planificaron escrituras y se desaloja alguna del working set (la mas vieja preferiblemente M=0)
 
 ## Ejercicios
-
-
-
-
-
 
 
 

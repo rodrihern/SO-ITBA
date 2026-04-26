@@ -1,3 +1,8 @@
+---
+materia: so
+tipo: apuntes
+---
+
 # 📌 Procesos
 
 ## Modelo de procesos
@@ -6,7 +11,7 @@
 - **Programa**: estático en disco, no hace nada hasta que se ejecuta.  
 - Un mismo programa puede correr varias veces → distintos procesos.  
 - Conceptualmente cada proceso tiene su propio CPU (sus registros y variables).  
-- Esto permite **pseudo-concurrencia** en un solo CPU (*pseudo paralelismo*).  
+- Esto permite **pseudo-concurrencia** en un solo CPU (*pseudo paralelismo*). Ver detalles de threads en [[t4_threads|Threads]].  
 - **Paralelismo real**: múltiples CPUs compartiendo memoria física.  
 - Multiprogramación: facilita pensar en procesos corriendo en paralelo en lugar de en los *context switches*.  
 - El switch de procesos **no es determinista ni reproducible** → difícil suponer tiempos de ejecución.
@@ -22,7 +27,7 @@
 
 ### En UNIX
 - `fork`: clona el proceso (padre → hijo), incluyendo memoria, variables y fds abiertos.  
-- `execve`: reemplaza la imagen del proceso (código, heap, stack, registros) pero preserva fds abiertos.  
+- `execve`: reemplaza la imagen del proceso (código, heap, stack, registros) pero preserva fds abiertos. Ver syscalls relacionadas en [[t3_ipc|IPC]] y [[U1_codigo#Syscalls|Assembly - Syscalls]].  
 - Modelo en **2 etapas**: el hijo puede ajustar file descriptors antes de `exec`.
 
 ### En Win32
@@ -60,7 +65,7 @@
 - **Ready**: listo para ejecutar, esperando CPU.  
 - **Blocked**: esperando un evento externo (ej: I/O).  
 
-Los procesos van cambiando entre estos estados mediante *scheduler* y eventos de I/O.
+Los procesos van cambiando entre estos estados mediante *scheduler* y eventos de I/O. Ver [[t5_scheduling|Scheduling]] para los algoritmos de selección de procesos.
 
 ---
 

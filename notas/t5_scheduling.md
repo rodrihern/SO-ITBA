@@ -1,6 +1,11 @@
+---
+materia: so
+tipo: apuntes
+---
+
 # Scheduling
 
-El mecanismo por el cual se elige que proceso va a correr
+El mecanismo por el cual se elige que proceso va a correr. Ver [[t2_procesos#Estados de procesos|estados de procesos]] para entender el ciclo Running/Ready/Blocked.
 
 El scheduler **no** es un proceso
 
@@ -21,6 +26,8 @@ la teca esta en encontrar un balance entre ambas cosas
 bursts largos $\rightarrow$ cpu bound
 
 bursts cortos $\rightarrow$ I/O bound
+
+> En arquitecturas [[U4_arquitecturas#Procesadores ARM|RISC (ARM)]] casi todas las instrucciones duran 1 ciclo, lo que hace más predecible la duración de los bursts. En [[U4_arquitecturas#Procesadores x86|CISC (x86)]] las instrucciones tienen duraciones variables.
 
 *preemptive*: el tipo interrumpe a los procesos
 
@@ -45,7 +52,7 @@ si hay un proceso que tarda mucho en bloquearse se pierde la sensacion de respon
 
 ### Real time
 
-No hace falta que sea preemptive pues tiene un uso especifico para programas especificos que cooperan entre si. Son sistemas donde no solo importa la correctitud de la respuesta sino el tiempo en el que se da (como el calculo de trayectoria de un misil que me va a hacer teta para tirar las bengalas y distraerlo)
+No hace falta que sea preemptive pues tiene un uso especifico para programas especificos que cooperan entre si. Son sistemas donde no solo importa la correctitud de la respuesta sino el tiempo en el que se da (como el calculo de trayectoria de un misil que me va a hacer teta para tirar las bengalas y distraerlo). Relacionado con los [[U4_arquitecturas#Procesadores ARM|procesadores ARM]] usados en embebidos/tiempo real.
 
 ## Algoritmos
 

@@ -1,9 +1,14 @@
+---
+materia: so
+tipo: apuntes
+---
+
 # File system
 
 Resuelve 3 problemas:
 1. Almacenar mucha informacion
 2. Persistencia de la informacion 
-3. multiples procesos accediendo a la misma informacion
+3. multiples procesos accediendo a la misma informacion (ver [[t3_ipc|IPC]] para sincronización entre procesos)
 
 Se puede ver al disco como una secuencia lineal de bloques de tamaño fijo que se pueden leer/escribir
 
@@ -92,7 +97,7 @@ f2: 16 23 14 18 20
 
 **Un file system de UNIX tiene bloques de 4KB y direcciones de disco de 4 bytes. ¿Cuál es el tamaño máximo de archivo si los i-nodes tienen 10 entradas directas, 1 entrada simple indirecta, 1 entrada doble indirecta y 1 entrada triple indirecta?**
 
-bloques de 4K, direcciones de 4B $\rightarrow 2^{12} / 2^2 = 2^{10}$ direcciones por bloque 
+bloques de 4K, direcciones de 4B $\rightarrow 2^{12} / 2^2 = 2^{10}$ direcciones por bloque. Ver [[U1_codigo#Tamaño de Tipos de Datos|tamaños de tipos de datos]] para entender el tamaño de un puntero de 4 bytes en 32 bits.
 
 10 entradas directas $\rightarrow 10$ bloques
 

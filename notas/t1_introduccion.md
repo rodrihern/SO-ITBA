@@ -1,9 +1,14 @@
+---
+materia: so
+tipo: apuntes
+---
+
 # Introducción a Sistemas Operativos
 
 ## Kernel vs User Mode
 - **Kernel mode**: el procesador puede ejecutar todas las instrucciones, incluso las privilegiadas (acceso directo a hardware, manejo de memoria, interrupciones).  
 - **User mode**: ejecución restringida, los programas de usuario no pueden ejecutar instrucciones privilegiadas.  
-- Solo el **sistema operativo** corre en modo kernel; el resto de los procesos corre en modo usuario y solicita servicios mediante **system calls**.
+- Solo el **sistema operativo** corre en modo kernel; el resto de los procesos corre en modo usuario y solicita servicios mediante **system calls**. Ver [[U3_gestionDeMemoria#GDT y LDT|Arqui - GDT/LDT]] para la gestión de privilegios a nivel hardware.
 
 
 
@@ -22,13 +27,13 @@
   - Generales y de propósito específico.
   - Especiales: Instruction Pointer (IP), Stack Pointer (SP), Program Status Word (PSW/RFLAGS).
 - **Context switch**: guardar y restaurar el estado de un proceso o thread.
-- **Pipeline**: solapa ejecución de instrucciones.
-- **Superscalar**: múltiples instrucciones en paralelo.
+- **Pipeline**: solapa ejecución de instrucciones (ver [[t5_scheduling|Scheduling]] para scheduling de procesos y [[U4_arquitecturas#Pipeline|Arqui - Pipeline]] para el pipeline del procesador).
+  - **Superscalar**: múltiples instrucciones en paralelo.
 - **Modos de ejecución**: user vs kernel.
 
 ### Multithreading y Multicore
-- **Multithreading (hardware)**: un núcleo mantiene varios hilos listos e intercambia entre ellos rápidamente. No es paralelismo real.  
-- **Multicore**: múltiples núcleos físicos independientes, que sí permiten paralelismo real.  
+  - **Multithreading (hardware)**: un núcleo mantiene varios hilos listos e intercambia entre ellos rápidamente. No es paralelismo real.  
+  - **Multicore**: múltiples núcleos físicos independientes, que sí permiten paralelismo real. Ver [[U4_arquitecturas#Multinúcleo (Multicore)|Arqui - Multicore]].
 - **Ley de Moore**: crecimiento exponencial histórico de transistores.
 
 ### Memoria
@@ -41,7 +46,7 @@
 ### Disco
 - **HDD**: cilindros, tracks, sectores. Acceso mecánico.  
 - **SSD**: sin partes móviles, más rápido y confiable.  
-- **Memoria virtual**: combina RAM y disco para dar la ilusión de más memoria disponible.
+  - **Memoria virtual**: combina RAM y disco para dar la ilusión de más memoria disponible. Ver [[t6_memoria#Memoria virtual|SO - Memoria Virtual]].
 
 ### I/O (Input/Output)
 - **Componentes**: dispositivo + controlador.  
@@ -56,9 +61,9 @@
   4. El kernel atiende la interrupción.
 
 ### Booteo
-1. La BIOS (firmware en la placa madre) corre al encender.  
+1. La BIOS (firmware en la placa madre) corre al encender. Ver [[U2_hardware#Interrupciones|hardware - interrupciones y PIC]] que se inicializan en este proceso.
 2. Testea memoria y hardware.  
-3. Escanea buses PCIe/PCI en busca de dispositivos.  
+3. Escanea buses PCIe/PCI en busca de dispositivos. Ver [[U2_hardware#Buses|hardware - buses]].
 4. Determina dispositivo de booteo.  
 5. Carga el primer sector en memoria y lo ejecuta.  
 6. Se carga el sistema operativo.  

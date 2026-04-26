@@ -1,7 +1,12 @@
+---
+materia: so
+tipo: apuntes
+---
+
 # Threads
 
 ## Conceptos básicos
-- Un **proceso** tiene su espacio de direcciones y al menos un **thread**.
+- Un **proceso** tiene su espacio de direcciones y al menos un **thread**. Ver modelo de procesos en [[t2_procesos|Procesos]].
 - Varios threads dentro de un proceso comparten espacio de direcciones → se ejecutan en paralelo/pseudo-paralelo.
 - Los threads son **más baratos** que procesos:
   - Creación / destrucción: 10–100 veces más rápido.
@@ -14,13 +19,13 @@
 
 ## Ejemplos
 - **Procesador de texto**: corrector ortográfico, auto-guardado, renderizado.
-- **Servidor web**: múltiples conexiones simultáneas, búsquedas en disco (bloqueantes), envío de páginas en caché.
+- **Servidor web**: múltiples conexiones simultáneas, búsquedas en disco (bloqueantes), envío de páginas en caché. Ver [[2_HTTP#Conexiones HTTP|HTTP - Conexiones persistentes]] y cómo HTTP/2 usa [[2_HTTP#Evolución de las Versiones|multiplexación]] para aprovechar esto.
 
 ## Modelo de threads
 - **Proceso**: agrupa recursos (memoria, archivos, señales).
 - **Thread**: entidad schedulada en CPU → unidad de ejecución dentro del proceso.
 - Threads = *lightweight processes*.
-- **Problema**: comparten memoria → condiciones de carrera si no hay sincronización.
+- **Problema**: comparten memoria → condiciones de carrera si no hay sincronización. Ver [[t3_ipc#Condiciones de carrera|IPC - Condiciones de carrera]] y [[t3_ipc#Semáforos|semáforos]].
 
 ## Implementaciones
 1. **Espacio de usuario**:
